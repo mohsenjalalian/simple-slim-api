@@ -1,0 +1,17 @@
+version: '2.4'
+services:
+   slim-api-php-cli:
+        build:
+            context: ./
+            dockerfile: ./docker/slim-api-php-cli/Dockerfile
+        image: slim-api-php-cli:latest
+        container_name: slim-api-php-cli
+        tty: true
+        stdin_open: true
+        volumes:
+            - ./src:/src
+        logging:
+            driver: json-file
+            options:
+                max-size: "1m"
+                max-file: "4"
