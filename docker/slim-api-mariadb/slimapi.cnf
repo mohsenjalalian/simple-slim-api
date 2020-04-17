@@ -1,0 +1,20 @@
+# this config will override on main config
+
+[mysqld]
+skip-host-cache
+skip-name-resolve
+#default-time-zone = 'Asia/Tehran'
+performance_schema = on
+
+max_connections		= 500
+wait_timeout		= 60
+max_allowed_packet	= 16M
+tmp_table_size		= 256M
+max_heap_table_size	= 256M
+
+query_cache_size		= 0
+query_cache_type  		= 0
+
+innodb_log_file_size = 1G
+innodb_buffer_pool_size	= 12G
+innodb_buffer_pool_instances = 12

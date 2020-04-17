@@ -30,3 +30,32 @@ services:
                 max-file: "4"
         ports:
             - 8282:80 #development mode
+   slim-api-mariadb:
+        build:
+            context: ./
+            dockerfile: ./docker/slim-api-mariadb/Dockerfile
+        image: slip-api-mariadb:latest
+        container_name: slim-api-mariadb
+        volumes:
+            - slim-api-mariadata:/var/lib/mysql
+        logging:
+            driver: json-file
+            options:
+                max-size: "1m"
+                max-file: "4"
+        environment:
+            - MYSQL_ROOT_PASSWORD=123456
+   slim-api-phpmyadmin:
+        image: phpmyadmin/phpmyadmin:4.9.2-1
+        container_name: slim-api-phpmyadmin
+        environment:
+            - PMA_HOST=slim-api-mariadb
+        logging:
+            driver: json-file
+            options:
+                max-size: "1m"
+                max-file: "4"
+        ports:
+            - 9292:80 #development mode
+volumes:
+    slim-api-mariadata:
