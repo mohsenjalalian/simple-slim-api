@@ -1,11 +1,11 @@
 version: '2.4'
 services:
-   slim-api-php-cli:
+   slim-api-php-fpm:
         build:
             context: ./
-            dockerfile: ./docker/slim-api-php-cli/Dockerfile
-        image: slim-api-php-cli:latest
-        container_name: slim-api-php-cli
+            dockerfile: ./docker/slim-api-php-fpm/Dockerfile
+        image: slim-api-php-fpm:latest
+        container_name: slim-api-php-fpm
         tty: true
         stdin_open: true
         volumes:
@@ -15,3 +15,18 @@ services:
             options:
                 max-size: "1m"
                 max-file: "4"
+   slim-api-nginx:
+        build:
+            context: ./
+            dockerfile: ./docker/slim-api-nginx/Dockerfile
+        image: slim-api-nginx:latest
+        container_name: slim-api-nginx
+        volumes:
+          - ./src:/src
+        logging:
+            driver: json-file
+            options:
+                max-size: "1m"
+                max-file: "4"
+        ports:
+            - 8282:80 #development mode
